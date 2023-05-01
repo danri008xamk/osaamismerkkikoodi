@@ -1,0 +1,34 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model opettaja {
+  id       Int    @id @default(autoincrement())
+  etunimi  String @db.VarChar(60)
+  sukunimi String @db.VarChar(60)
+  salasana String @db.VarChar(100)
+}
+
+model oppilas {
+  id               Int    @id @default(autoincrement())
+  nimi             String @db.VarChar(60)
+  luokka           String @db.VarChar(5)
+  kirjautumisavain String @db.VarChar(100)
+  opettajaId       Int
+}
+
+model oppilasosaamismerkki {
+  oppilasId         Int
+  osaamismerkkiNimi String @db.VarChar(60)
+  id                Int    @id @default(autoincrement())
+}
+
+model osaamismerkki {
+  nimi String @id @db.VarChar(60)
+  kuva String @db.VarChar(60)
+}
